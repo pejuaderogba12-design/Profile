@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Peju Aderogba — Front-End Builder</title>
+  <meta name="description" content="Personal profile and project showcase for Tejubabyface Aderogba, a student learning HTML, CSS and JavaScript." />
+
+  <!-- Emoji favicon, no image file needed -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👩‍💻</text></svg>" />
+
+  <!-- Fonts: Space Grotesk for headings, Inter for body text, JetBrains Mono for the one real "code" moment -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ============================================
+       NAV — styled like an editor tab bar
+       ============================================ -->
+  <nav class="tabbar">
+    <div class="tabbar-window">
+      <span class="dot dot-coral"></span>
+      <span class="dot dot-sunshine"></span>
+      <span class="dot dot-sky"></span>
+      <span class="tab-label">profile.html</span>
+    </div>
+
+    <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
+      <span></span><span></span><span></span>
+    </button>
+
+    <div class="nav-links" id="navLinks">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="Switch to light mode">
+        <span class="theme-icon" aria-hidden="true">🌙</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ============================================
+       HERO
+       ============================================ -->
+  <header class="hero" id="top">
+    <div class="hero-text">
+      <p class="code-comment">
+        <span class="mono muted">// </span><span class="mono" id="typedComment" data-text="hi, I'm"></span><span class="cursor" aria-hidden="true">|</span>
+      </p>
+
+      <h1 class="hero-name">Peju Aderogba</h1>
+
+      <p class="hero-tagline">
+        I build small websites and I'm still learning something new every week.
+        Right now I'm having the most fun with JavaScript.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#projects" class="btn btn-primary">View my projects</a>
+        <a href="#contact" class="btn btn-ghost">Say hello</a>
+      </div>
+    </div>
+
+    <div class="hero-avatar" aria-hidden="true">
+      <div class="avatar-ring">
+        <span class="avatar-initials">PEJU</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ============================================
+         ABOUT
+         ============================================ -->
+    <section id="about" class="section">
+      <h2 class="section-heading">About me</h2>
+
+      <div class="about-grid">
+        <p class="about-bio">
+          I'm a student who started coding because I wanted to build my own website instead of just using
+          other people's apps. I've learned how to structure a page with HTML, style it with CSS, and bring
+          it to life with JavaScript. I like figuring out why something is broken almost as much as I like
+          building it in the first place.
+        </p>
+
+        <dl class="fact-list">
+          <div class="fact">
+            <dt>Learning since</dt>
+            <dd>September 2025</dd>
+          </div>
+          <div class="fact">
+            <dt>Favourite language</dt>
+            <dd>JavaScript</dd>
+          </div>
+          <div class="fact">
+            <dt>Currently building</dt>
+            <dd>A to-do list app</dd>
+          </div>
+          <div class="fact">
+            <dt>Fun fact</dt>
+            <dd>My first line of code had 3 typos</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- ============================================
+         SKILLS
+         ============================================ -->
+    <section id="skills" class="section">
+      <h2 class="section-heading">What I can build with</h2>
+      <p class="section-lede">Tools and languages I've used in my projects so far.</p>
+
+      <ul class="skill-list">
+        <li class="skill-pill">HTML</li>
+        <li class="skill-pill">CSS</li>
+        <li class="skill-pill">JavaScript</li>
+        <li class="skill-pill">Responsive design</li>
+        <li class="skill-pill">Git &amp; GitHub</li>
+        <li class="skill-pill">Debugging</li>
+      </ul>
+    </section>
+
+    <!-- ============================================
+         PROJECTS
+         ============================================ -->
+    <section id="projects" class="section">
+      <h2 class="section-heading">Things I've built</h2>
+      <p class="section-lede">A few projects from this term. Code and live demos are on GitHub.</p>
+
+      <div class="project-grid">
+
+        <!-- Project 1 -->
+        <article class="project-card project-coral">
+          <p class="project-type mono">Budget</p>
+          <h3 class="project-title">Budget Tracker</h3>
+          <p class="project-desc">
+            A smart budget tracker web app that lets you log income, record daily expenses, and instantly calculate your remaining balance in real time.
+          </p>
+          <ul class="project-tech">
+            <li>HTML</li><li>CSS</li><li>JavaScript</li>
+          </ul>
+          <div class="project-links">
+            <!-- TODO: replace with your real repo link -->
+            <a href="https://github.com/pejuaderogba12-design/budget-tracker" target="_blank" rel="noopener">View code</a>
+            <a href="https://pejuaderogba12-design.github.io/budget-tracker/" target="_blank" rel="noopener">Live demo</a>
+          </div>
+        </article>
+
+        <!-- Project 2 -->
+        <article class="project-card project-sky">
+          <p class="project-type mono">Website</p>
+          <h3 class="project-title">Google Search Engine</h3>
+          <p class="project-desc">
+            A lightweight, responsive search engine web app built with JavaScript. Features instant keyword filtering, real-time query matching, and dynamic result rendering for fast information retrieval.
+          </p>
+          <ul class="project-tech">
+            <li>HTML</li><li>CSS</li>
+          </ul>
+          <div class="project-links">
+            <a href="https://github.com/pejuaderogba12-design/search-engine" target="_blank" rel="noopener">View code</a>
+            <a href="https://pejuaderogba12-design.github.io/search-engine/" target="_blank" rel="noopener">Live demo</a>
+          </div>
+        </article>
+
+        <!-- Project 3 -->
+        <article class="project-card project-sunshine">
+          <p class="project-type mono">Design</p>
+          <h3 class="project-title">Weather App</h3>
+          <p class="project-desc">
+            A dynamic weather forecast web application built with JavaScript and asynchronous API integration. Delivers real-time temperature updates, atmospheric conditions, and location-based meteorological data.
+          </p>
+          <ul class="project-tech">
+            <li>HTML</li><li>CSS</li><li>JavaScript</li>
+          </ul>
+          <div class="project-links">
+            <a href="https://github.com/pejuaderogba12-design/Weather-App" target="_blank" rel="noopener">View code</a>
+            <a href="https://pejuaderogba12-design.github.io/Weather-App/" target="_blank" rel="noopener">Live demo</a>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ============================================
+         CONTACT
+         ============================================ -->
+    <section id="contact" class="section section-contact">
+      <h2 class="section-heading">Let's build something</h2>
+      <p class="section-lede">
+        The best way to reach me is by email, or check out my code on GitHub.
+      </p>
+
+      <div class="contact-row">
+        <button class="contact-email mono" id="copyEmail" data-email="tejubabyface@example.com">
+          tejubabyface@example.com
+          <span class="copy-hint" id="copyHint">click to copy</span>
+        </button>
+
+        <a class="contact-github" href="https://github.com/yourusername" target="_blank" rel="noopener">
+          github.com/yourusername
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>Built with HTML, CSS and JavaScript.</p>
+    <p>© <span id="year"></span> Tejubabyface Aderogba. <a href="#top">Back to top</a></p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

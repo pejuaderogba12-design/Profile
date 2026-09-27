@@ -1,0 +1,907 @@
+/* =================================================================
+   PROFILE THEME — style.css
+
+   This file is organised in sections. Search for the ALL-CAPS
+   headings (like "COLOURS & THEME") to jump around.
+
+   Tip: everything in the ":root" section below is a CSS variable.
+   Change a value there and it updates everywhere it's used —
+   try changing --accent-coral and watch what happens!
+   ================================================================= */
+
+
+/* -----------------------------------------------------------------
+   COLOURS & THEME
+   Dark mode is the default. Light mode values live in the
+   [data-theme="light"] block further down and override these.
+   ----------------------------------------------------------------- */
+   :root {
+    --bg: #12172b;
+    --surface: #1b2140;
+    --surface-raised: #212850;
+    --border: rgba(255, 255, 255, 0.1);
+  
+    --text: #f3f1ea;
+    --text-muted: #8b93b8;
+  
+    --accent-coral: #ff8b6b;
+    --accent-sky: #5fd4f4;
+    --accent-sunshine: #ffcb5c;
+  
+    --font-display: "Space Grotesk", sans-serif;
+    --font-body: "Inter", sans-serif;
+    --font-mono: "JetBrains Mono", monospace;
+  
+    --radius: 10px;
+    --max-width: 1100px;
+  }
+  
+  [data-theme="light"] {
+    --bg: #f5f6fa;
+    --surface: #ffffff;
+    --surface-raised: #ffffff;
+    --border: rgba(18, 23, 43, 0.12);
+  
+    --text: #12172b;
+    --text-muted: #5b6178;
+  }
+  
+  /* -----------------------------------------------------------------
+     RESET & BASE
+     ----------------------------------------------------------------- */
+  * {
+    box-sizing: border-box;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    * {
+      animation-duration: 0.001ms !important;
+      transition-duration: 0.001ms !important;
+    }
+  }
+  
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    line-height: 1.6;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+  
+  a {
+    color: inherit;
+  }
+  
+  .mono {
+    font-family: var(--font-mono);
+  }
+  
+  .muted {
+    color: var(--text-muted);
+  }
+  
+  /* Visible keyboard focus everywhere */
+  a:focus-visible,
+  button:focus-visible {
+    outline: 2px solid var(--accent-sky);
+    outline-offset: 3px;
+  }
+  
+  /* -----------------------------------------------------------------
+     NAV — styled like a code editor's tab bar
+     ----------------------------------------------------------------- */
+  .tabbar {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.9rem 1.5rem;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+  }
+  
+  .tabbar-window {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  
+  .dot-coral { background: var(--accent-coral); }
+  .dot-sunshine { background: var(--accent-sunshine); }
+  .dot-sky { background: var(--accent-sky); }
+  
+  .tab-label {
+    margin-left: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+  
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 1.75rem;
+  }
+  
+  .nav-links a {
+    text-decoration: none;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    transition: color 0.15s ease;
+  }
+  
+  .nav-links a:hover,
+  .nav-links a.active {
+    color: var(--text);
+  }
+  
+  .theme-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    background: transparent;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+  
+  .nav-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+    width: 34px;
+    height: 34px;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .nav-toggle span {
+    display: block;
+    height: 2px;
+    width: 100%;
+    background: var(--text);
+    border-radius: 2px;
+  }
+  
+  /* -----------------------------------------------------------------
+     HERO
+     ----------------------------------------------------------------- */
+  .hero {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 5rem 1.5rem 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 3rem;
+  }
+  
+  .hero-text {
+    max-width: 560px;
+  }
+  
+  .code-comment {
+    font-size: 1rem;
+    margin: 0 0 1rem;
+    min-height: 1.5em;
+  }
+  
+  .cursor {
+    display: inline-block;
+    color: var(--accent-sky);
+    animation: blink 1s steps(1) infinite;
+  }
+  
+  @keyframes blink {
+    50% { opacity: 0; }
+  }
+  
+  .hero-name {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 6vw, 3.75rem);
+    font-weight: 700;
+    margin: 0 0 1rem;
+    letter-spacing: -0.01em;
+  }
+  
+  /* -----------------------------------------------------------------
+     NAME ANIMATION
+     Your name is split into one <span class="letter"> per character
+     by script.js (see "7. ANIMATE THE NAME" in that file). Each span
+     carries a --i custom property with its position in the word,
+     which is used below to make letters animate one after another
+     instead of all at once.
+  
+     Three ready-made styles are included. The one that's active is
+     whichever set of rules matches the classes on .hero-name in
+     index.html. Right now that's the default (SHIMMER). To try a
+     different one, open index.html and add name-wave or name-wiggle
+     to the hero-name element's class list, e.g.:
+  
+       <h1 class="hero-name name-wave">Tejubabyface Aderogba</h1>
+  
+     ----------------------------------------------------------------- */
+  
+  /* Every letter starts invisible and drops into place.
+     This part runs once, no matter which style is active below. */
+  .hero-name .letter {
+    display: inline-block;
+    opacity: 0;
+    animation-name: letterDrop;
+    animation-duration: 0.6s;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+    animation-delay: calc(var(--i) * 0.05s);
+  }
+  
+  .hero-name .word {
+    display: inline-block;
+    white-space: nowrap; /* letters can wrap between words, never inside one */
+  }
+  
+  @keyframes letterDrop {
+    0% {
+      opacity: 0;
+      transform: translateY(-40px) rotate(-8deg);
+    }
+    60% {
+      opacity: 1;
+      transform: translateY(6px) rotate(2deg);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) rotate(0deg);
+    }
+  }
+  
+  /* --- STYLE 1: SHIMMER (default — no extra class needed) -----------
+     Once a letter lands, a mini rainbow gradient cycles through it
+     forever. Because each letter starts its cycle at a slightly
+     different time (using --i again), the colours appear to travel
+     across the name like a wave.
+  
+     Note: the gradient has to be applied to EACH letter, not to the
+     whole name at once. That's because background-clip: text only
+     clips an element's OWN background to its OWN text — and since
+     every letter needs to be its own inline-block box (so the
+     drop/wave/wiggle transforms can move it), the letters no longer
+     count as the parent's "own" text for this trick to work on the
+     parent alone. */
+  .hero-name .letter {
+    background: linear-gradient(
+      90deg,
+      var(--accent-coral),
+      var(--accent-sunshine),
+      var(--accent-sky),
+      var(--accent-coral)
+    );
+    background-size: 400% auto;
+    background-position: 0% center;
+  }
+  
+  @supports (background-clip: text) or (-webkit-background-clip: text) {
+    .hero-name .letter {
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+    }
+  }
+  
+  .hero-name .letter {
+    animation-name: letterDrop, nameShimmer;
+    animation-duration: 0.6s, 3s;
+    animation-timing-function: ease, linear;
+    animation-delay: calc(var(--i) * 0.05s), calc(var(--i) * 0.12s);
+    animation-iteration-count: 1, infinite;
+    animation-fill-mode: forwards, none;
+  }
+  
+  @keyframes nameShimmer {
+    to {
+      background-position: 400% center;
+    }
+  }
+  
+  /* --- STYLE 2: WAVE --------------------------------------------------
+     Add class "name-wave" to try this instead. The gradient turns
+     off, letters go back to a solid colour, and each one gently
+     bobs up and down forever, slightly out of sync with its
+     neighbours (thanks to --i again). */
+  .hero-name.name-wave,
+  .hero-name.name-wiggle {
+    background: none;
+    -webkit-text-fill-color: var(--text);
+    color: var(--text);
+    animation: none;
+  }
+  
+  /* Letters also need to be switched back from the shimmer gradient
+     to a plain solid colour when wave/wiggle mode is active. */
+  .hero-name.name-wave .letter,
+  .hero-name.name-wiggle .letter {
+    background: none;
+    -webkit-background-clip: border-box;
+    background-clip: border-box;
+    -webkit-text-fill-color: var(--text);
+    color: var(--text);
+  }
+  
+  .hero-name.name-wave .letter {
+    animation-name: letterDrop, letterWave;
+    animation-duration: 0.6s, 1.6s;
+    animation-timing-function: ease, ease-in-out;
+    animation-delay: calc(var(--i) * 0.05s), calc(var(--i) * 0.05s + 0.6s);
+    animation-iteration-count: 1, infinite;
+    animation-fill-mode: forwards, none;
+  }
+  
+  @keyframes letterWave {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  
+  /* --- STYLE 3: WIGGLE ------------------------------------------------
+     Add class "name-wiggle" to try this one. Same idea as the wave,
+     but each letter rocks side to side instead of bobbing. */
+  .hero-name.name-wiggle .letter {
+    animation-name: letterDrop, letterWiggle;
+    animation-duration: 0.6s, 2.2s;
+    animation-timing-function: ease, ease-in-out;
+    animation-delay: calc(var(--i) * 0.05s), calc(var(--i) * 0.05s + 0.6s);
+    animation-iteration-count: 1, infinite;
+    animation-fill-mode: forwards, none;
+  }
+  
+  @keyframes letterWiggle {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-6deg); }
+    75% { transform: rotate(6deg); }
+  }
+  
+  .hero-tagline {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    max-width: 46ch;
+    margin: 0 0 2rem;
+  }
+  
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  
+  .btn {
+    display: inline-block;
+    padding: 0.75rem 1.4rem;
+    border-radius: var(--radius);
+    font-weight: 500;
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-family: inherit;
+    background: none;
+    cursor: pointer;
+    transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+  }
+  
+  .btn:hover {
+    transform: translateY(-2px);
+  }
+  
+  .btn-primary {
+    background: var(--accent-coral);
+    color: #12172b;
+  }
+  
+  .btn-ghost {
+    border: 1px solid var(--border);
+    color: var(--text);
+  }
+  
+  .btn-ghost:hover {
+    border-color: var(--accent-sky);
+  }
+  
+  .hero-avatar {
+    flex-shrink: 0;
+  }
+  
+  .avatar-ring {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: conic-gradient(
+      from 180deg,
+      var(--accent-coral),
+      var(--accent-sunshine),
+      var(--accent-sky),
+      var(--accent-coral)
+    );
+    padding: 6px;
+  }
+  
+  .avatar-initials {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: var(--surface);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-size: 2.75rem;
+    font-weight: 600;
+  }
+  
+  /* -----------------------------------------------------------------
+     SECTIONS (shared)
+     ----------------------------------------------------------------- */
+  .section {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 4rem 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+  
+  .section-heading {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin: 0 0 0.5rem;
+  }
+  
+  .section-lede {
+    color: var(--text-muted);
+    margin: 0 0 2.5rem;
+    max-width: 60ch;
+  }
+  
+  /* -----------------------------------------------------------------
+     ABOUT
+     ----------------------------------------------------------------- */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 3rem;
+  }
+  
+  .about-bio {
+    margin: 0;
+    max-width: 60ch;
+  }
+  
+  .fact-list {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+  }
+  
+  .fact dt {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 0.2rem;
+  }
+  
+  .fact dd {
+    margin: 0;
+    font-weight: 500;
+  }
+  
+  /* -----------------------------------------------------------------
+     SKILLS
+     ----------------------------------------------------------------- */
+  .skill-list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .skill-pill {
+    padding: 0.5rem 1.1rem;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    font-size: 0.9rem;
+    background: var(--surface);
+  }
+  
+  /* -----------------------------------------------------------------
+     PROJECTS
+     ----------------------------------------------------------------- */
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  
+  .project-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-top: 3px solid transparent;
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .project-coral { border-top-color: var(--accent-coral); }
+  .project-sky { border-top-color: var(--accent-sky); }
+  .project-sunshine { border-top-color: var(--accent-sunshine); }
+  
+  .project-type {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin: 0 0 0.6rem;
+  }
+  
+  .project-title {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    margin: 0 0 0.6rem;
+  }
+  
+  .project-desc {
+    font-size: 0.92rem;
+    color: var(--text-muted);
+    margin: 0 0 1.2rem;
+    flex-grow: 1;
+  }
+  
+  .project-tech {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    padding: 0;
+    margin: 0 0 1.2rem;
+  }
+  
+  .project-tech li {
+    font-size: 0.75rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    background: var(--bg);
+    color: var(--text-muted);
+  }
+  
+  .project-links {
+    display: flex;
+    gap: 1.2rem;
+    font-size: 0.88rem;
+    font-weight: 500;
+  }
+  
+  .project-links a {
+    text-decoration: none;
+    border-bottom: 1px solid currentColor;
+    padding-bottom: 1px;
+  }
+  
+  /* -----------------------------------------------------------------
+     CONTACT
+     ----------------------------------------------------------------- */
+  .section-contact {
+    text-align: left;
+  }
+  
+  .contact-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    align-items: center;
+  }
+  
+  .contact-email {
+    position: relative;
+    font-size: 1.05rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 0.85rem 1.4rem;
+    border-radius: var(--radius);
+    cursor: pointer;
+  }
+  
+  .contact-email:hover {
+    border-color: var(--accent-coral);
+  }
+  
+  .copy-hint {
+    position: absolute;
+    bottom: -1.6rem;
+    left: 0;
+    font-size: 0.72rem;
+    font-family: var(--font-body);
+    color: var(--text-muted);
+    white-space: nowrap;
+  }
+  
+  .contact-github {
+    font-size: 1.05rem;
+    text-decoration: none;
+    border-bottom: 1px solid currentColor;
+    padding-bottom: 2px;
+  }
+  
+  /* -----------------------------------------------------------------
+     FOOTER
+     ----------------------------------------------------------------- */
+  .site-footer {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 3rem 1.5rem 4rem;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+  }
+  
+  .site-footer p {
+    margin: 0.3rem 0;
+  }
+  
+  .site-footer a {
+    color: var(--text-muted);
+  }
+  
+  /* -----------------------------------------------------------------
+     GUIDE PAGE
+     Everything below styles guide.html — the getting-started guide.
+     It reuses all the colours, fonts and nav styles already defined
+     above, so the two pages feel like one connected site.
+     ----------------------------------------------------------------- */
+  
+  .guide-hero {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 4rem 1.5rem 3rem;
+  }
+  
+  .guide-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 2.75rem);
+    font-weight: 700;
+    margin: 0.75rem 0 1rem;
+  }
+  
+  .guide-lede {
+    color: var(--text-muted);
+    max-width: 60ch;
+    font-size: 1.05rem;
+    margin: 0;
+  }
+  
+  .nav-cta {
+    padding: 0.4rem 0.9rem;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    text-decoration: none;
+  }
+  
+  /* --- File table ------------------------------------------------- */
+  .file-table {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  
+  .file-row {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    gap: 1.5rem;
+    padding: 0.9rem 1.2rem;
+    border-bottom: 1px solid var(--border);
+  }
+  
+  .file-row:last-child {
+    border-bottom: none;
+  }
+  
+  .file-row-head {
+    background: var(--surface);
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+  
+  /* --- Checklist ---------------------------------------------------
+     Checked state is remembered using localStorage — see script.js,
+     section "8. GUIDE PAGE CHECKLIST". */
+  .checklist {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+  
+  .checklist label {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.7rem;
+    cursor: pointer;
+  }
+  
+  .checklist input[type="checkbox"] {
+    margin-top: 0.2rem;
+    width: 18px;
+    height: 18px;
+    accent-color: var(--accent-coral);
+    flex-shrink: 0;
+  }
+  
+  .checklist input:checked + span,
+  .checklist li:has(input:checked) label {
+    color: var(--text-muted);
+    text-decoration: line-through;
+  }
+  
+  .checklist-progress {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+  }
+  
+  /* --- Code blocks --------------------------------------------------
+     A simplified stand-in for a real code editor, styled to match
+     the tab-bar look used in the nav. */
+  .code-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.2rem 1.4rem;
+    overflow-x: auto;
+    font-size: 0.88rem;
+    line-height: 1.7;
+    margin: 0 0 1rem;
+  }
+  
+  .hl-coral { color: var(--accent-coral); }
+  .hl-sky { color: var(--accent-sky); }
+  .hl-sunshine { color: var(--accent-sunshine); }
+  
+  .section-note {
+    color: var(--text-muted);
+    font-size: 0.92rem;
+    max-width: 65ch;
+  }
+  
+  /* --- Name-animation demo ------------------------------------------ */
+  .anim-demo {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  .demo-name {
+    font-size: clamp(2rem, 6vw, 2.75rem);
+    margin-bottom: 1.75rem;
+  }
+  
+  .anim-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+  
+  /* --- Colour swatches ----------------------------------------------- */
+  .swatch-row {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  
+  .swatch {
+    flex: 1;
+    min-width: 160px;
+    height: 90px;
+    border-radius: var(--radius);
+    display: flex;
+    align-items: flex-end;
+    padding: 0.6rem;
+    font-size: 0.78rem;
+    color: #12172b;
+  }
+  
+  /* --- Step list (publish steps — genuinely sequential) --------------- */
+  .step-list {
+    padding-left: 1.4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    max-width: 65ch;
+  }
+  
+  .step-list li {
+    padding-left: 0.3rem;
+  }
+  
+  /* -----------------------------------------------------------------
+     RESPONSIVE — guide page additions
+     ----------------------------------------------------------------- */
+  @media (max-width: 760px) {
+    .file-row {
+      grid-template-columns: 1fr;
+      gap: 0.3rem;
+    }
+  }
+  
+  @media (max-width: 760px) {
+    .nav-toggle {
+      display: flex;
+    }
+  
+    .nav-links {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 1rem 1.5rem 1.5rem;
+      gap: 1rem;
+      display: none;
+    }
+  
+    .nav-links.open {
+      display: flex;
+    }
+  
+    .hero {
+      flex-direction: column-reverse;
+      text-align: left;
+      padding-top: 3rem;
+    }
+  
+    .avatar-ring {
+      width: 120px;
+      height: 120px;
+    }
+  
+    .avatar-initials {
+      font-size: 2rem;
+    }
+  
+    .about-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+  
+    .project-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  
